@@ -18,5 +18,9 @@ import json
 # Import the json database into a Python dictionary
 data = json.load(open("data.json", 'r'))
 
-search_key = input("Enter a word: ")
-print(data[search_key])
+# Looks up and returns word definition in the database
+def search(word):
+    return data[word]
+    
+word = input("Enter a word: ")
+print(search(word))
