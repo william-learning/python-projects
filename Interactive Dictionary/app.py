@@ -37,6 +37,7 @@ def search(word):
         return data[word]
     elif len(get_close_matches(word, keys, cutoff=0.8)) > 0 :
         yn = input("Did you mean %s instead? Enter Y if yes, or N if no: " % get_close_matches(word, keys, cutoff=0.8)[0]).upper()
+        # Prompt user for similarity check confirmation
         if yn == "Y":
             return data[get_close_matches(word, keys, cutoff=0.8)[0]]
         elif yn == "N":
@@ -49,4 +50,11 @@ def search(word):
     
 word = input("Enter a word: ")
 # Making the search case insensitive, lowercase for all searches
-print(search(word.lower()))
+output = search(word.lower())
+
+# Optimise output for list
+if type(output) == list:
+    for item in output:
+        print(item)
+else: 
+    print(output)
