@@ -35,8 +35,9 @@ def search(word):
     # Accounting for inputs which do not match the database
     if word in data: 
         return data[word]
+    elif len(get_close_matches(word, keys, cutoff=0.8)) > 0 :
+        return "Did you mean %s instead?" %get_close_matches(word, keys, cutoff=0.8)[0]
     else: 
-        print(get_close_matches(word, keys))
         return "The word doesn't exist. Please double check it." 
     
     
