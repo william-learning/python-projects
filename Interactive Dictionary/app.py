@@ -13,15 +13,17 @@ Additional Notes:
     1. JSON is a data format with key-value pairs. 
 """
 
+
+
 import json
 
-# Import the json database into a Python dictionary
+# Loading the json database into a Python dictionary
 data = json.load(open("data.json", 'r'))
 
 
-# Looks up and returns word definition in the database
+# Looks up and returns word definition from the database
 def search(word):
-    # Need to account for inputs which do not match the database
+    # Accounting for inputs which do not match the database
     if word in data: 
         return data[word]
     else: 
@@ -29,4 +31,5 @@ def search(word):
     
     
 word = input("Enter a word: ")
-print(search(word))
+# Making the search case insensitive, lowercase for all searches
+print(search(word.lower()))
