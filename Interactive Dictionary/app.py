@@ -4,6 +4,8 @@ Interactive Dictionary
 Author: William
 Date: 06/11/2017
 
+https://github.com/williamsoftwarecode/python-projects
+
 This application is a Python based interactive dictionary with a JSON database. 
 Features include: 
     1. A search from a database for word definitions 
@@ -11,15 +13,22 @@ Features include:
     
 Additional Notes:
     1. JSON is a data format with key-value pairs. 
+    2. Use difflib get_close_matches to compare input and word similarities
+    3. Libraries can be found on https://docs.python.org/3/library/index.html
+    4. "dictionary".keys() and "dictionary".values()
 """
 
 
 
 import json
+import difflib                          # Library to compare text
+from difflib import SequenceMatcher     # Used to calculate similarity ratio
+from difflib import get_close_matches
+
 
 # Loading the json database into a Python dictionary
 data = json.load(open("data.json", 'r'))
-
+keys = data.keys()
 
 # Looks up and returns word definition from the database
 def search(word):
@@ -27,7 +36,8 @@ def search(word):
     if word in data: 
         return data[word]
     else: 
-        return "The word doesn't exist. Please double check it."
+        print(get_close_matches(word, keys))
+        return "The word doesn't exist. Please double check it." 
     
     
 word = input("Enter a word: ")
