@@ -45,7 +45,8 @@ fg = folium.FeatureGroup(name="My Map")
 
 # Add multiple markers based on coordinates from a list - plots the locations of volcanoes in the USA
 for lt, ln, nm, el in coordinates:
-    fg.add_child(folium.Marker(location=[lt,ln], popup=str(el)+" m", icon=folium.Icon(color=color_producer(el))))
+    fg.add_child(folium.CircleMarker(location=[lt,ln], popup=str(el)+" m", 
+    radius=6, fill='true', color='grey', fill_color=color_producer(el), fill_opacity=0.7))
 # Different elevations are given a different color 
 # Green: 0 - 1000 m 
 # Yellow: 1000 - 3000 m
