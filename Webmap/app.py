@@ -28,6 +28,15 @@ name = list(data["NAME"])
 elev = list(data["ELEV"])
 coordinates = zip(lat, lon, name, elev)
 
+# Function for 
+def color_producer(elevation): 
+    if elevation < 1000:
+        return 'green'
+    elif 1000 <= elevation < 3000:
+        return 'orange'
+    else: 
+        return 'red'
+
 # Creates an instance of the Map class
 map = folium.Map(location=[38.58,-99.09], zoom_start=6, tiles="Mapbox Bright")
 
@@ -36,8 +45,11 @@ fg = folium.FeatureGroup(name="My Map")
 
 # Add multiple markers based on coordinates from a list - plots the locations of volcanoes in the USA
 for lt, ln, nm, el in coordinates:
-    fg.add_child(folium.Marker(location=[lt,ln], popup=str(el)+" m", icon=folium.Icon(color='green')))
-
+    fg.add_child(folium.Marker(location=[lt,ln], popup=str(el)+" m", icon=folium.Icon(color=color_producer(el))))
+# Different elevations are given a different color 
+# Green: 0 - 1000 m 
+# Yellow: 1000 - 3000 m
+# Red: >= 3000 m
 
 map.add_child(fg)
 
