@@ -20,12 +20,13 @@ Additional Notes:
 import folium
 import pandas
 
-
 # Read coordinates of volcanoes in Volcanoes_USA.txt
 data = pandas.read_csv("Volcanoes_USA.txt")
 lat = list(data["LAT"])
 lon = list(data["LON"])
-coordinates = zip(lat,lon)
+name = list(data["NAME"])
+elev = list(data["ELEV"])
+coordinates = zip(lat, lon, name, elev)
 
 # Creates an instance of the Map class
 map = folium.Map(location=[38.58,-99.09], zoom_start=6, tiles="Mapbox Bright")
@@ -34,8 +35,8 @@ map = folium.Map(location=[38.58,-99.09], zoom_start=6, tiles="Mapbox Bright")
 fg = folium.FeatureGroup(name="My Map")
 
 # Add multiple markers based on coordinates from a list - plots the locations of volcanoes in the USA
-for lt, ln in coordinates:
-    fg.add_child(folium.Marker(location=[lt,ln], popup="Hi I am a Marker", icon=folium.Icon(color='green')))
+for lt, ln, nm, el in coordinates:
+    fg.add_child(folium.Marker(location=[lt,ln], popup=str(el)+" m", icon=folium.Icon(color='green')))
 
 
 map.add_child(fg)
