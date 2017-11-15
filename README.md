@@ -7,6 +7,7 @@ Each project can be found in their individual folder and the particular script t
 ## List of Completed Projects
 1. Interactive Dictionary 
 2. Webmap using Folium
+3. Website Blocker
 
 About Me
 ------
