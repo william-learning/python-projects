@@ -50,7 +50,8 @@ fgp = folium.FeatureGroup(name="Population")
 # Yellow: 1000 - 3000 m
 # Red: >= 3000 m
 for lt, ln, nm, el in coordinates:
-    fgv.add_child(folium.CircleMarker(location=[lt,ln], popup=str(el)+" m", 
+    pp = str(nm)+", "+str(el)+" m"
+    fgv.add_child(folium.CircleMarker(location=[lt,ln], popup=folium.Popup(pp, parse_html=True), 
     radius=6, fill='true', color='grey', fill_color=color_producer(el), fill_opacity=0.7))
 
 # Adding a polygon using GeoJson in Folium
@@ -62,8 +63,8 @@ fgp.add_child(folium.GeoJson('world.json', style_function=lambda x: {'fillColor'
 
 
 # Adding feature groups to the map with layer control
-map.add_child(fgv)
 map.add_child(fgp)
+map.add_child(fgv)
 map.add_child(folium.LayerControl())
 
 # Create HTML map
