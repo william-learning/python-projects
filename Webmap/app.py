@@ -53,7 +53,10 @@ for lt, ln, nm, el in coordinates:
 # Red: >= 3000 m
 
 # Adding a polygon using GeoJson in Folium
-fg.add_child(folium.GeoJson('world.json'))
+fg.add_child(folium.GeoJson('world.json', style_function=lambda x: {'fillColor':'green' if x['properties']['POP2005'] < 10000000 
+    else 'orange' if 10000000 <= x['properties']['POP2005'] < 20000000
+    else 'red'
+}))
 # fg.add_child(folium.GeoJson(data=open('world.json', 'r', encoding='utf-8-sig').read()))
 
 map.add_child(fg)
