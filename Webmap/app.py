@@ -41,25 +41,30 @@ def color_producer(elevation):
 map = folium.Map(location=[38.58,-99.09], zoom_start=6, tiles="Mapbox Bright")
 
 # Add elements or objects to the map - referred to as child
-fg = folium.FeatureGroup(name="My Map")
+fgv = folium.FeatureGroup(name="Volcanoes")
+fgp = folium.FeatureGroup(name="Population")
 
 # Add multiple markers based on coordinates from a list - plots the locations of volcanoes in the USA
-for lt, ln, nm, el in coordinates:
-    fg.add_child(folium.CircleMarker(location=[lt,ln], popup=str(el)+" m", 
-    radius=6, fill='true', color='grey', fill_color=color_producer(el), fill_opacity=0.7))
 # Different elevations are given a different color 
 # Green: 0 - 1000 m 
 # Yellow: 1000 - 3000 m
 # Red: >= 3000 m
+for lt, ln, nm, el in coordinates:
+    fgv.add_child(folium.CircleMarker(location=[lt,ln], popup=str(el)+" m", 
+    radius=6, fill='true', color='grey', fill_color=color_producer(el), fill_opacity=0.7))
 
 # Adding a polygon using GeoJson in Folium
-fg.add_child(folium.GeoJson('world.json', style_function=lambda x: {'fillColor':'green' if x['properties']['POP2005'] < 10000000 
+# fg.add_child(folium.GeoJson(data=open('world.json', 'r', encoding='utf-8-sig').read()))
+fgp.add_child(folium.GeoJson('world.json', style_function=lambda x: {'fillColor':'green' if x['properties']['POP2005'] < 10000000 
     else 'orange' if 10000000 <= x['properties']['POP2005'] < 20000000
     else 'red'
 }))
-# fg.add_child(folium.GeoJson(data=open('world.json', 'r', encoding='utf-8-sig').read()))
 
-map.add_child(fg)
+
+# Adding feature groups to the map with layer control
+map.add_child(fgv)
+map.add_child(fgp)
+map.add_child(folium.LayerControl())
 
 # Create HTML map
 map.save("map.html")
