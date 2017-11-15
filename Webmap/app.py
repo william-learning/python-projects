@@ -52,6 +52,10 @@ for lt, ln, nm, el in coordinates:
 # Yellow: 1000 - 3000 m
 # Red: >= 3000 m
 
+# Adding a polygon using GeoJson in Folium
+fg.add_child(folium.GeoJson('world.json'))
+# fg.add_child(folium.GeoJson(data=open('world.json', 'r', encoding='utf-8-sig').read()))
+
 map.add_child(fg)
 
 # Create HTML map
