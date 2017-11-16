@@ -13,11 +13,12 @@ Features include:
     
 Additional Notes:
     1. Flask contains all the prototypes to set up websites
+    2. render_template accesses an HTML file and displays it on the requested URL
 
 """
 
 
-from flask import Flask
+from flask import Flask, render_template
 import os
 
 # Instantiating an object of the Flask class 
@@ -25,11 +26,11 @@ app=Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Website homepage"
+    return render_template('home.html')
     
 @app.route('/about/')
 def about():
-    return "About page: Website content"
+    return render_template('about.html')
     
 if __name__=="__main__":
     app.run(debug=True,
