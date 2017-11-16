@@ -20,11 +20,16 @@ Additional Notes:
 from flask import Flask
 import os
 
+# Instantiating an object of the Flask class 
 app=Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Website content"
+    return "Website homepage"
+    
+@app.route('/about/')
+def about():
+    return "About page: Website content"
     
 if __name__=="__main__":
     app.run(debug=True,
