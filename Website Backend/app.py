@@ -18,12 +18,15 @@ Additional Notes:
 
 
 from flask import Flask
+import os
 
-app=flask(__name__)
+app=Flask(__name__)
 
 @app.route('/')
 def home():
     return "Website content"
     
 if __name__=="__main__":
-    app.run(debug=True)
+    app.run(debug=True,
+    host=os.getenv('IP', '0.0.0.0'),
+    port=int(os.getenv('PORT', 8080)))
