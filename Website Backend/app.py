@@ -1,0 +1,29 @@
+"""
+Website Backend
+
+Author: William
+Date: 16/11/2017
+
+https://github.com/williamsoftwarecode/python-projects
+
+This application is builds a website with Python via Flask. 
+Features include: 
+    1. Backend to serve HTML files (static websites)
+    2. Deployed website on a live server
+    
+Additional Notes:
+    1. Flask contains all the prototypes to set up websites
+
+"""
+
+
+from flask import Flask
+
+app=flask(__name__)
+
+@app.route('/')
+def home():
+    return "Website content"
+    
+if __name__=="__main__":
+    app.run(debug=True)
