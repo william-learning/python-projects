@@ -14,6 +14,8 @@ Features include:
 Additional Notes:
     1. Flask contains all the prototypes to set up websites
     2. render_template accesses an HTML file and displays it on the requested URL
+    3. Python virtual environment for isolating application during deployment
+    4. https://community.c9.io/t/how-to-install-virtual-env/10776
 
 """
 
