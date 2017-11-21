@@ -25,10 +25,43 @@ User can:
 
 """
 
-import sqlite3
 from tkinter import *
 
 window=Tk()
 
-b1=Button(window,text="View All")
-b1.grid(row=,column=)
+l1=Label(window,text='Title')
+l1.grid(row=0,column=0)
+l2=Label(window,text='Author')
+l2.grid(row=0,column=2)
+l3=Label(window,text='Year')
+l3.grid(row=1,column=0)
+l4=Label(window,text='ISBN')
+l4.grid(row=1,column=2)
+
+title=StringVar()
+author=StringVar()
+year=StringVar()
+isbn=StringVar()
+e1=Entry(window,textvariable=title)
+e1.grid(row=0,column=1)
+e2=Entry(window,textvariable=author)
+e2.grid(row=0,column=3)
+e3=Entry(window,textvariable=year)
+e3.grid(row=1,column=1)
+e4=Entry(window,textvariable=isbn)
+e4.grid(row=1,column=3)
+
+b1=Button(window,text="View all",height=1,width=20)
+b1.grid(row=2,column=3)
+b1=Button(window,text="Search entry")
+b1.grid(row=3,column=3)
+b1=Button(window,text="Add entry")
+b1.grid(row=4,column=3)
+b1=Button(window,text="Update")
+b1.grid(row=5,column=3)
+b1=Button(window,text="Delete")
+b1.grid(row=6,column=3)
+b1=Button(window,text="Close")
+b1.grid(row=7,column=3)
+
+window.mainloop()
