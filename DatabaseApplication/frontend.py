@@ -39,6 +39,9 @@ def search_command():
     list1.delete(0,END)
     for row in backend.search(title_text.get(),author_text.get(),year_text.get(),isbn_text.get()):
         list1.insert(END,row)
+        
+def add_command():
+    backend.insert(title_text.get(),author_text.get(),year_text.get(),isbn_text.get())
 
 window=Tk()
 
@@ -77,7 +80,7 @@ b1=Button(window,text="View all",width=12,command=view_command)
 b1.grid(row=2,column=3)
 b1=Button(window,text="Search entry",width=12,command=search_command)
 b1.grid(row=3,column=3)
-b1=Button(window,text="Add entry",width=12)
+b1=Button(window,text="Add entry",width=12,command=add_command)
 b1.grid(row=4,column=3)
 b1=Button(window,text="Update",width=12)
 b1.grid(row=5,column=3)
