@@ -29,7 +29,11 @@ User can:
 from tkinter import *
 import backend
 
-
+def get_selected_row(event):
+    global selected_tuple
+    index=list1.curselection()[0]
+    selected_tuple=list1.get(index)
+    
 def view_command():
     list1.delete(0,END)
     for row in backend.view():
@@ -42,6 +46,19 @@ def search_command():
         
 def add_command():
     backend.insert(title_text.get(),author_text.get(),year_text.get(),isbn_text.get())
+    list1.delete(0,END)
+    list1.insert(END,(title_text.get(),author_text.get(),year_text.get(),isbn_text.get()))
+
+def update_command():
+    backend.update(title_text.get(),author_text.get(),year_text.get(),isbn_text.get())
+    list1.delete(0,END)
+    list1.insert(END,(title_text.get(),author_text.get(),year_text.get(),isbn_text.get()))
+
+def delete_command():
+    backend.delete(selected_tuple[0])
+    list1.delete(0,END)
+    for row in backend.view():
+        list1.insert(END,row)
 
 window=Tk()
 
@@ -73,8 +90,12 @@ list1.grid(row=2,column=0,rowspan=6,columnspan=2)
 sb1=Scrollbar(window)
 sb1.grid(row=2,column=2,rowspan=6)
 
+# Need to link listbox with vertical scrollbar
 list1.configure(yscrollcommand=sb1.set)
 sb1.configure(command=list1.yview)
+
+# Add binding to Listbox (event type and function)
+list1.bind('<<ListboxSelect>>',get_selected_row)
 
 b1=Button(window,text="View all",width=12,command=view_command)
 b1.grid(row=2,column=3)
@@ -82,9 +103,9 @@ b1=Button(window,text="Search entry",width=12,command=search_command)
 b1.grid(row=3,column=3)
 b1=Button(window,text="Add entry",width=12,command=add_command)
 b1.grid(row=4,column=3)
-b1=Button(window,text="Update",width=12)
+b1=Button(window,text="Update selected",width=12)
 b1.grid(row=5,column=3)
-b1=Button(window,text="Delete",width=12)
+b1=Button(window,text="Delete selected",width=12,command=delete_command)
 b1.grid(row=6,column=3)
 b1=Button(window,text="Close",width=12)
 b1.grid(row=7,column=3)
